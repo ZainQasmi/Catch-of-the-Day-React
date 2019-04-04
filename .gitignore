@@ -1,0 +1,11 @@
+# Junk files
+.DS_Store
+
+# Python bytecode
+*.pyc
+
+# API KEYS & shizz
+credentials.yaml
+
+# Node Packages
+node_modules
