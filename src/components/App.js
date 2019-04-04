@@ -4,6 +4,7 @@ import Order from "../components/Order";
 import Inventory from "../components/Inventory";
 import sampleFishes from "../sample-fishes";
 import Fish from "../components/Fish";
+import base from "../base";
 
 class App extends Component {
   // Method that updates state and the state should live in the same Component
@@ -12,12 +13,50 @@ class App extends Component {
     order: {}
   };
 
+  componentDidMount() {
+    // first reinstate our localstorage
+    const localStorageRef = localStorage.getItem(
+      this.props.match.params.storeID
+    );
+    console.log(localStorageRef);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+
+    // console.log(this.props.match.params.storeID);
+    this.ref = base.syncState(`${this.props.match.params.storeID}/fishes`, {
+      context: this,
+      state: "fishes"
+    });
+  }
+
+  componentDidUpdate() {
+    console.log("yo ipdated");
+    localStorage.setItem(
+      this.props.match.params.storeID,
+      JSON.stringify(this.state.order)
+    ); //(key, value) pair
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addFish = fish => {
     // 1. Take a copy of the existing state. AVOID MUTATION
     const fishes = { ...this.state.fishes };
     // 2. Add our new fish to that fishes variable
     fishes[`fish${Date.now()}`] = fish;
     // 3. Set the new fishes object to state
+    this.setState({ fishes: fishes });
+  };
+
+  updateFish = (...allArgs) => {
+    // 1. Take a copy of the current state
+    const fishes = { ...this.state.fishes };
+    // 2. Update the state
+    fishes[allArgs[0]] = allArgs[1];
+    // 3. Set the state
     this.setState({ fishes: fishes });
   };
 
@@ -56,6 +95,8 @@ class App extends Component {
         <Inventory
           onInventorySubmit={this.addFish}
           onInventoryLoadFishes={this.loadSampleFishes}
+          fishes={this.state.fishes}
+          onInventoryUpdatedFish={this.updateFish}
         />
       </div>
     );
