@@ -24,7 +24,7 @@ npm start
 
 * [React](https://reactjs.org/) - The web framework used
 * [npm](https://www.npmjs.com/) - Package Management
-* [VS Code](https://code.visualstudio.com/) - Code editor
+* [VS Code](https://code.visualstudio.com/) - Editor
 
 ### License
 
