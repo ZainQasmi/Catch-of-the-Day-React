@@ -1,6 +1,6 @@
 # Catch-of-the-Day
 
-A simple react application emulating a restaurant ordering taking system
+A simple react application emulating a restaurant order taking system
 
 ### Prerequisites
 
