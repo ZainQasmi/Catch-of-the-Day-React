@@ -20,6 +20,15 @@ npm install
 npm start
 ```
 
+### Screenshots
+
+
+![1](/snapshots/screenshot0.png)
+![2](/snapshots/screenshot1.png)
+![3](/snapshots/screenshot2.png)
+![4](/snapshots/screenshot3.png)
+
+
 ### Built With
 
 * [React](https://reactjs.org/) - The web framework used
